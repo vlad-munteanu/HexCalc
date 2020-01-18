@@ -8,7 +8,7 @@ A small cli calculator for doing calculations with base 16 numbers.
 - [ ] Multiplication
 - [ ] Division     
 - [ ] Operations with decimal and hex numbers
-
+- [ ] Hex to String                          
 
 ## Questions
 If you have any questions about this repository, or any others of mine, please
