@@ -22,7 +22,9 @@ int main(int argc, char *argv[]) {
         int numToConvert = strtol(argv[2], NULL, 16);
      //   printf("Num %d", numToConvert);
         printf(numToConvert);
-    }  
+    } else { 
+
+    } 
 
 
     return 0;  
