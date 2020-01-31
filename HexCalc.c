@@ -5,16 +5,22 @@
 #define ANSI_COLOR_RED     "\x1b[31m"
 
 void handleFlags(int argc, char *argv[]);
+int hex_to_int(char c);
+int hex_to_ascii(char c, char d);
 
 void usage() {
     printf("Usage: [-c] [-s] <num> <operator> <num>/n");
-    printf("-c: Convert\n");
-    exit(1); 
+    printf("-c: Convert Hex to Decimal\n");
+    printf("-cd: Convert Decimal to Hex\n");
+    printf("-s: Convert Hex to String\n");
+    printf("-sh: Convert String to Hex\n");
+    
+    exit(1);
 }
 
 /* Possible Usage 
- * HexCalc <arg> num <operator> 
- * HexCalc num  
+ * HexCalc <arg> num <operator>
+ * HexCalc num
  *
  */
 int main(int argc, char *argv[]) {
@@ -22,14 +28,16 @@ int main(int argc, char *argv[]) {
         usage();
     }
     
-
-    // Check Convert Flag 
-    // Segmentation fault if argv[1] is a num 
-    // Check if there is flags   
+    
+    // Check Convert Flag
+    // Segmentation fault if argv[1] is a num
+    // Check if there is flags
     if (argc >= 3) {
         handleFlags(argc, argv);
+    } else {
+        printf("Must give a number after argument\n");
     }
-    return 0;  
+    return 0;
 }
 
 void handleFlags(int argc, char *argv[]) {
@@ -39,9 +47,44 @@ void handleFlags(int argc, char *argv[]) {
         if (convertedNumber == -1) {
             printf("Something went wrong idk what\n");
         } else {
-            printf("Converted Number: %d\n", convertedNumber);
+            printf("Decimal: %d\n", convertedNumber);
         }
-    } else if (strcmp(argv[1],"-s")) { // String
-
+    } else if (!strcmp(argv[1],"-cd")) { // To Hex
+        int temp = atoi(argv[2]);
+        printf("Hex: 0x%04x\n", temp);
+    } else if (!strcmp(argv[1],"-s")) { // To String
+        const char* st = argv[2];
+        int length = strlen(st);
+        int i;
+        char buf = 0;
+        for(i = 0; i < length; i++){
+            if(i % 2 != 0){
+                printf("%c", hex_to_ascii(buf, st[i]));
+            }else{
+                buf = st[i];
+            }
+        }
+        printf("\n");
+    } else if (!strcmp(argv[1], "-sh")) {
+        char buf[255] = {0};
+        char yourString[255] = argv[2];
+        for (size_t i = 0; i < strlen(yourString); i++) {
+            sprintf(buf, "%s%x", buf, yourString[i]);
+        }
+        printf(buf+ '\n');
     }
+}
+
+int hex_to_int(char c){
+    int first = c / 16 - 3;
+    int second = c % 16;
+    int result = first*10 + second;
+    if(result > 9) result--;
+    return result;
+}
+
+int hex_to_ascii(char c, char d){
+    int high = hex_to_int(c) * 16;
+    int low = hex_to_int(d);
+    return high+low;
 }
