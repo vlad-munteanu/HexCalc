@@ -9,11 +9,11 @@ int hex_to_int(char c);
 int hex_to_ascii(char c, char d);
 
 void usage() {
-    printf("Usage: [-c] [-s] <num> <operator> <num>/n");
-    printf("-c: Convert Hex to Decimal\n");
-    printf("-cd: Convert Decimal to Hex\n");
-    printf("-s: Convert Hex to String\n");
-    printf("-sh: Convert String to Hex\n");
+    printf("Usage: [-c] [-s] <num> <operator> <num> \n");
+    printf("-c: Convert Hex to Decimal \n");
+    printf("-cd: Convert Decimal to Hex \n");
+    printf("-s: Convert Hex to String \n");
+    printf("-sh: Convert String to Hex \n");
     
     exit(1);
 }
@@ -66,12 +66,7 @@ void handleFlags(int argc, char *argv[]) {
         }
         printf("\n");
     } else if (!strcmp(argv[1], "-sh")) {
-        char buf[255] = {0};
-        char yourString[255] = argv[2];
-        for (size_t i = 0; i < strlen(yourString); i++) {
-            sprintf(buf, "%s%x", buf, yourString[i]);
-        }
-        printf(buf+ '\n');
+     
     }
 }
 
