@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     if (argc >= 3) {
         handleFlags(argc, argv);
     } else {
-        printf("Must give a number after argument\n");
+       usage();
     }
     return 0;
 }
